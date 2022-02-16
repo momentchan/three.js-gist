@@ -3,9 +3,8 @@ import Experience from "./Experience"
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 export default class Camera {
-
-    constructor() {
-        this.experience = new Experience()
+    constructor(experience) {
+        this.experience = experience
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas

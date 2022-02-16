@@ -2,9 +2,8 @@ import * as THREE from 'three'
 import Experience from "../Experience"
 
 export default class Fox {
-
-    constructor() {
-        this.experience = new Experience()
+    constructor(experience) {
+        this.experience = experience
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
