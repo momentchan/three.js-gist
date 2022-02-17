@@ -4,7 +4,6 @@ import Time from "./Utils/Time"
 import Resources from './Utils/Resource'
 import Camera from "./Camera"
 import Renderer from './Renderer'
-import World from './World/World.js'
 import sources from './sources.js'
 import Debug from './Utils/Debug'
 
