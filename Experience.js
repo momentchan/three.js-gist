@@ -4,7 +4,6 @@ import Time from "./Utils/Time"
 import Resources from './Utils/Resource'
 import Camera from "./Camera"
 import Renderer from './Renderer'
-import sources from './sources.js'
 import Debug from './Utils/Debug'
 
 /**
@@ -12,7 +11,7 @@ import Debug from './Utils/Debug'
  * You need to set up World, Camera, Render in child class
  */
 export default class Experience {
-    constructor(canvas) {
+    constructor(canvas, sources) {
         // Global access
         window.experience = this
 

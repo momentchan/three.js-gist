@@ -2,8 +2,8 @@ import Experience from '../Experience.js'
 import WorldSample from './WorldSample.js'
 
 export default class ExperienceSample extends Experience {
-    constructor(canvas){
-        super(canvas)
+    constructor(canvas, sources){
+        super(canvas, sources)
 
         this.world = new WorldSample(this)
     }
