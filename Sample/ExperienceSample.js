@@ -1,6 +1,6 @@
-import Camera from '../Camera.js'
-import Renderer from '../Renderer.js'
-import Experience from '../Experience.js'
+import Camera from '../Common/Camera.js'
+import Renderer from '../Common/Renderer.js'
+import Experience from '../Common/Experience.js'
 import WorldSample from './WorldSample.js'
 
 export default class ExperienceSample extends Experience {

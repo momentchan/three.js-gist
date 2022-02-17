@@ -1,8 +1,8 @@
 import * as THREE from 'three'
-import Sizes from "./Utils/Sizes"
-import Time from "./Utils/Time"
-import Resources from './Utils/Resource'
-import Debug from './Utils/Debug'
+import Debug from '../Utils/Debug'
+import Sizes from '../Utils/Sizes'
+import Time from '../Utils/Time'
+import Resources from '../Utils/Resource'
 
 /**
  * Base class for experience instance
@@ -22,7 +22,7 @@ export default class Experience {
         this.time = new Time()
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
-
+        
         // Resize event
         this.sizes.on('resize', () => {
             this.resize()
