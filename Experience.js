@@ -7,15 +7,12 @@ import Renderer from './Renderer'
 import sources from './sources.js'
 import Debug from './Utils/Debug'
 
-let instance = null
-
+/**
+ * Base class for experience instance
+ * You need to set up World, Camera, Render in child class
+ */
 export default class Experience {
     constructor(canvas) {
-        if (instance)
-            return instance
-
-        instance = this
-
         // Global access
         window.experience = this
 
