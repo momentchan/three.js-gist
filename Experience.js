@@ -2,8 +2,6 @@ import * as THREE from 'three'
 import Sizes from "./Utils/Sizes"
 import Time from "./Utils/Time"
 import Resources from './Utils/Resource'
-import Camera from "./Camera"
-import Renderer from './Renderer'
 import Debug from './Utils/Debug'
 
 /**
@@ -24,8 +22,6 @@ export default class Experience {
         this.time = new Time()
         this.scene = new THREE.Scene()
         this.resources = new Resources(sources)
-        this.camera = new Camera(this)
-        this.renderer = new Renderer(this)
 
         // Resize event
         this.sizes.on('resize', () => {
@@ -36,16 +32,6 @@ export default class Experience {
         this.time.on('tick', () => {
             this.update()
         })
-    }
-
-    resize() {
-        this.camera.resize()
-        this.renderer.resize()
-    }
-
-    update() {
-        this.camera.update()
-        this.renderer.update()
     }
 
     destroy() {
@@ -66,9 +52,7 @@ export default class Experience {
                 }
             }
         })
-
-        this.camera.controls.dispose()
-        this.renderer.instance.dispose()
+        
         if (this.debug.active) {
             this.debug.ui.destroy()
         }
