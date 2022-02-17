@@ -1,15 +1,15 @@
-import Camera from '../Common/Camera.js'
-import Renderer from '../Common/Renderer.js'
 import Experience from '../Common/Experience.js'
 import WorldSample from './WorldSample.js'
+import RendererSample from './RendererSample.js'
+import CameraSample from './CameraSample.js'
 
 export default class ExperienceSample extends Experience {
     constructor(canvas, sources){
         super(canvas, sources)
 
         this.world = new WorldSample(this)
-        this.camera = new Camera (this)
-        this.renderer = new Renderer(this)
+        this.camera = new CameraSample (this)
+        this.renderer = new RendererSample(this)
     }
 
     resize(){

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import Environment from '../World/Environment'
+import Environment from '../World/Environment.js'
 
 export default class EnvironmentSample extends Environment {
     constructor(experience) {

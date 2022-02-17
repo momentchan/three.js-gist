@@ -1,4 +1,4 @@
-import Camera from './three.js-gist/Camera'
+import Camera from '../Common/Camera.js'
 
 export default class CameraSample extends Camera {
 }
