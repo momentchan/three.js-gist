@@ -21,8 +21,10 @@ export default class Experience {
         this.sizes = new Sizes()
         this.time = new Time()
         this.scene = new THREE.Scene()
-        this.resources = new Resources(sources)
-        
+
+        if (sources != null)
+            this.resources = new Resources(sources)
+
         // Resize event
         this.sizes.on('resize', () => {
             this.resize()
@@ -32,6 +34,12 @@ export default class Experience {
         this.time.on('tick', () => {
             this.update()
         })
+    }
+
+    resize(){
+    }
+
+    update() {
     }
 
     destroy() {
@@ -52,7 +60,7 @@ export default class Experience {
                 }
             }
         })
-        
+
         if (this.debug.active) {
             this.debug.ui.destroy()
         }

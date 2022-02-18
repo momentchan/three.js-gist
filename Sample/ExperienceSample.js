@@ -13,11 +13,13 @@ export default class ExperienceSample extends Experience {
     }
 
     resize(){
+        super.resize()
         this.camera.resize()
         this.renderer.resize()
     }
 
     update() {
+        super.update()
         this.world.update()
         this.camera.update()
         this.renderer.update()
