@@ -1,6 +1,7 @@
-import Camera from '../Common/Camera.js'
+import * as THREE from 'three'
+import CameraBase from '../Common/CameraBase'
 
-export default class CameraSample extends Camera {
+export default class CameraSample extends CameraBase {
     setInstance(){
         super.setInstance()
         this.instance = new THREE.PerspectiveCamera(

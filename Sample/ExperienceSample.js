@@ -1,9 +1,9 @@
-import Experience from '../Common/Experience.js'
-import WorldSample from './WorldSample.js'
-import RendererSample from './RendererSample.js'
-import CameraSample from './CameraSample.js'
+import ExperienceBase from '../Common/ExperienceBase'
+import WorldSample from './WorldSample'
+import RendererSample from './RendererSample'
+import CameraSample from './CameraSample'
 
-export default class ExperienceSample extends Experience {
+export default class ExperienceSample extends ExperienceBase {
     constructor(canvas, sources){
         super(canvas, sources)
 

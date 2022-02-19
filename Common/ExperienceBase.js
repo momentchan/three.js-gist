@@ -8,7 +8,7 @@ import Resources from '../Utils/Resource'
  * Base class for experience instance
  * You need to set up World, Camera, Render in child class
  */
-export default class Experience {
+export default class ExperienceBase {
     constructor(canvas, sources) {
         // Global access
         window.experience = this
@@ -35,8 +35,7 @@ export default class Experience {
             this.update()
         })
     }
-
-    resize(){
+    resize() {
     }
 
     update() {

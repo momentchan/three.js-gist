@@ -1,6 +1,7 @@
-import Renderer from '../Common/Renderer.js'
+import * as THREE from 'three'
+import RendererBase from '../Common/RendererBase'
 
-export default class RendererSample extends Renderer {
+export default class RendererSample extends RendererBase {
     setInstance(){
         super.setInstance()
         this.instance.physicallyCorrectLights = true

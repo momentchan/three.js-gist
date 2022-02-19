@@ -1,4 +1,4 @@
-export default class Environment {
+export default class EnvironmentBase {
     constructor(experience) {
         this.experience = experience
         this.scene = this.experience.scene

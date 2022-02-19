@@ -1,9 +1,9 @@
 import Floor from './Floor.js';
 import Fox from './Fox.js';
-import World from "../World/World.js";
+import WorldBase from "../World/WorldBase";
 import EnvironmentSample from './EnvironmentSample.js';
 
-export default class WorldSample extends World {
+export default class WorldSample extends WorldBase {
     constructor(experience) {
         super(experience)
         

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default class Renderer {
+export default class RendererBase {
     constructor(experience) {
         this.experience = experience
 
@@ -17,6 +17,7 @@ export default class Renderer {
             canvas: this.canvas,
             antialias: true
         })
+
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
     }
