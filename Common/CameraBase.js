@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-export default class Camera {
+export default class CameraBase {
     constructor(experience) {
         this.experience = experience
         this.sizes = this.experience.sizes
