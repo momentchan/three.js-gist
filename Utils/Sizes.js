@@ -17,5 +17,27 @@ export default class Sizes extends EventEmitter {
 
             this.trigger('resize')
         })
+
+        window.addEventListener('dblclick', () => {
+            this.trigger('dblclick')
+        })
+    }
+
+    fullScreen(canvas) {
+        const fullscreenElement = document.fullscreenElement || document.webkitFullScreenElement
+
+        if (!fullscreenElement) {
+            if (canvas.requestFullscreen) {
+                canvas.requestFullscreen()
+            } else if (canvas.webkitRequestFullscreen) {
+                canvas.webkitRequestFullscreen()
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen()
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen()
+            }
+        }
     }
 }

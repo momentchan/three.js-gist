@@ -29,12 +29,16 @@ export default class ExperienceBase {
         this.sizes.on('resize', () => {
             this.resize()
         })
+        this.sizes.on('dblclick', () => {
+            this.sizes.fullScreen(this.canvas)
+        })
 
         // Time tick event
         this.time.on('tick', () => {
             this.update()
         })
     }
+
     resize() {
     }
 
