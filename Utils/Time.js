@@ -1,4 +1,5 @@
 import EventEmitter from "./EventEmitter"
+import FPS from './FPS'
 
 export default class Time extends EventEmitter {
     constructor() {
@@ -6,6 +7,7 @@ export default class Time extends EventEmitter {
 
         // Setup
         this.start = Date.now()
+        this.fps = new FPS()
         this.current = this.start
         this.elapsed = 0
         this.delta = 16
@@ -13,6 +15,7 @@ export default class Time extends EventEmitter {
     }
 
     tick() {
+        this.fps.stats.begin()
         const currentTime = Date.now()
         this.delta = currentTime - this.current
         this.current = currentTime
@@ -23,5 +26,6 @@ export default class Time extends EventEmitter {
         })
         
         this.trigger('tick')
+        this.fps.stats.end()
     }
 }
