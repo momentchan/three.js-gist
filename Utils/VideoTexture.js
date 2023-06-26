@@ -8,8 +8,17 @@ export default class VideoTexture {
 		this.video.autoplay = true;
 		this.video.loop = false;
 		this.video.src = url;
+		// this.video.crossOrigin = 'anonymous';
+		this.video.playsInline = true
+		this.video.setAttribute('playsinline', true)
 
 		this.texture = new THREE.VideoTexture(this.video);
+
+		// console.log(this.video)
+	}
+
+	setSpeed(speed) {
+		this.video.playbackRate = speed
 	}
 
 	play() {
@@ -23,5 +32,7 @@ export default class VideoTexture {
 
 	destroy() {
 		this.video.pause()
+		this.video.remove()
+		this.video = null
 	}
 }
