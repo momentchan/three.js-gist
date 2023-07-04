@@ -16,15 +16,26 @@ export default class Touch extends EventEmitter {
         this.canvas.addEventListener('touchmove', e => this.onTouchMove(e))
         this.canvas.addEventListener('touchend', e => this.onTouchEnd(e))
         this.canvas.addEventListener('touchcancel', e => this.onTouchEnd(e))
-
+        this.canvas.addEventListener('click', e => this.onClick(e))
         this.touches = []
+
+        this.click = null
     }
 
+    onClick(event) {
+        const { ndcX, ndcY } = this.getTouchPosition(event)
+        this.click = new THREE.Vector2(ndcX, ndcY)
+        // console.log(this.click);
+        
+        this.trigger('click')
+    }
 
     onTouchStart(event) {
         this.isTouched = true
         this.touches.length = 0
-        this.getTouchPosition(event.touches[0])
+        const { ndcX, ndcY } = this.getTouchPosition(event.touches[0])
+        this.touchX = ndcX
+        this.touchY = ndcY
 
         this.trigger('touchstart')
     }
@@ -33,8 +44,8 @@ export default class Touch extends EventEmitter {
         event.preventDefault()
 
         if (this.isTouched) {
-            this.getTouchPosition(event.touches[0])
-            this.touches.push(new THREE.Vector2(this.touchX, this.touchY))
+            const { ndcX, ndcY } = this.getTouchPosition(event.touches[0])
+            this.touches.push(new THREE.Vector2(ndcX, ndcY))
         }
 
         this.trigger('touchmove')
@@ -55,10 +66,7 @@ export default class Touch extends EventEmitter {
         const ndcX = (screenX / rect.width) * 2 - 1
         const ndcY = -(screenY / rect.height) * 2 + 1
 
-        this.touchX = ndcX
-        this.touchY = ndcY
-
-        // (-1, 1)
-        // console.log(`${this.touchX} ${this.touchY}`);
+        return { ndcX, ndcY } // (-1, 1)
+        // console.log(`${ndcX} ${ndcY}`);
     }
 }

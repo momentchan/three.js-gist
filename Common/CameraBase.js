@@ -19,6 +19,19 @@ export default class CameraBase {
         return { w, h }
     }
 
+    getWorldPosFromNDC(ndc, distance) {
+        var vector = new THREE.Vector3(ndc.x, ndc.y, 0.2);
+
+        const cameraWorldPos = new THREE.Vector3();
+        this.instance.getWorldPosition(cameraWorldPos)
+
+        vector.unproject(this.instance);
+
+        var dir = vector.sub(cameraWorldPos).normalize();
+
+        return cameraWorldPos.clone().add(dir.multiplyScalar(distance));
+    }
+
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(
             75,
