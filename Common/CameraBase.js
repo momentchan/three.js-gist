@@ -12,18 +12,18 @@ export default class CameraBase {
         this.setOrbitControl()
     }
 
-    getWorldSizeAtDistance(distance){
+    getWorldSizeAtDistance(distance) {
         const fovRadians = THREE.MathUtils.degToRad(this.instance.fov);
         const h = 2 * Math.tan(fovRadians * 0.5) * distance;
         const w = h * this.instance.aspect;
-        return [w, h]
+        return { w, h }
     }
 
     setInstance() {
         this.instance = new THREE.PerspectiveCamera(
-            75, 
-            this.sizes.width / this.sizes.height, 
-            0.1, 
+            75,
+            this.sizes.width / this.sizes.height,
+            0.1,
             100)
         this.instance.position.z = 3
         this.scene.add(this.instance)
