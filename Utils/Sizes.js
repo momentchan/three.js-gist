@@ -8,14 +8,14 @@ export default class Sizes extends EventEmitter {
         this.width = window.innerWidth
         this.height = window.innerHeight
         this.aspect = this.width / this.height
-        this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+        this.pixelRatio = this.isMobile() ? Math.min(window.devicePixelRatio, 2) : window.devicePixelRatio
 
         // Resize event
         window.addEventListener('resize', () => {
             this.width = window.innerWidth
             this.height = window.innerHeight
             this.aspect = this.width / this.height
-            this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+            this.pixelRatio = this.isMobile() ? Math.min(window.devicePixelRatio, 2) : window.devicePixelRatio
 
             this.trigger('resize')
         })
@@ -23,6 +23,11 @@ export default class Sizes extends EventEmitter {
         window.addEventListener('dblclick', () => {
             this.trigger('dblclick')
         })
+    }
+
+    isMobile() {
+        const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+        return regex.test(navigator.userAgent);
     }
 
     fullScreen(canvas) {

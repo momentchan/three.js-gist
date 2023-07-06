@@ -35,8 +35,6 @@ export default class Touch extends EventEmitter {
         this.touches = []
 
         this.click = null
-
-        console.log(this.deviceType)
     }
 
     isTouchDevice() {
@@ -59,11 +57,8 @@ export default class Touch extends EventEmitter {
     getTouchPosition(event) {
         const rect = this.canvas.getBoundingClientRect()
 
-        const x = this.isTouchDevice() ? event.touches[0].clientX : event.clientX
-        const y = this.isTouchDevice() ? event.touches[0].clientY : event.clientY
-
-        const screenX = x - rect.left
-        const screenY = y - rect.top
+        const screenX = event.clientX - rect.left
+        const screenY = event.clientY - rect.top
 
         const ndcX = (screenX / rect.width) * 2 - 1
         const ndcY = -(screenY / rect.height) * 2 + 1
@@ -79,7 +74,7 @@ export default class Touch extends EventEmitter {
         this.isTouched = true
         this.touches.length = 0
 
-        const { ndcX, ndcY } = this.getTouchPosition(event)
+        const { ndcX, ndcY } = this.getTouchPosition(this.isTouchDevice() ? event.touches[0] : event)
         this.touchX = ndcX
         this.touchY = ndcY
 
@@ -90,7 +85,7 @@ export default class Touch extends EventEmitter {
         event.preventDefault()
 
         if (this.isTouched) {
-            const { ndcX, ndcY } = this.getTouchPosition(event)
+            const { ndcX, ndcY } = this.getTouchPosition(this.isTouchDevice() ? event.touches[0] : event)
             this.touches.push(new THREE.Vector2(ndcX, ndcY))
         }
 
