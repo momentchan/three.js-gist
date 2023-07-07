@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import CameraBase from "../Common/CameraBase"
+import CameraBase from "../../Common/CameraBase"
 
 export default class BufferCamera extends CameraBase {
     setInstance() {
