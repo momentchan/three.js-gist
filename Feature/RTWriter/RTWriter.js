@@ -5,12 +5,12 @@ import BufferCamera from './BufferCamera';
  * Class renders scene to a render texture
  */
 export default class RTWriter {
-    constructor(experience, downSamplingScale) {
+    constructor(experience, camera, downSamplingScale) {
         this.renderer = experience.renderer.instance
         this.sizes = experience.sizes
 
+        this.camera = camera
         this.scene = new THREE.Scene()
-        this.camera = new BufferCamera(experience)
         this.target = new THREE.WebGLRenderTarget(this.sizes.width * downSamplingScale, this.sizes.height * downSamplingScale)
     }
 

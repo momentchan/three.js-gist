@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 import { fractalShader } from '../../Shader/fractalShader'
 import RTWriter from './RTWriter';
+import BufferCamera from './BufferCamera';
 
 export default class FractalMask extends RTWriter {
     constructor(experience) {
-        super(experience, 0.02)
+        super(experience, new BufferCamera(experience), 0.02)
 
         this.time = experience.time
         this.t = 0
