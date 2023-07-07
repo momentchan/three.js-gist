@@ -50,6 +50,14 @@ export default class Audio {
         return this.audioTexture
     }
 
+    getIntensity() {
+        var sum = 0;
+        for (var i = 0; i < this.audioData.length; i++) {
+            sum += this.audioData[i];
+        }
+        return sum / this.audioData.length
+    }
+
     update() {
         // update FTT
         this.analyser.getByteFrequencyData(this.audioData)
