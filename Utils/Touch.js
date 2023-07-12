@@ -34,6 +34,8 @@ export default class Touch extends EventEmitter {
         this.canvas.addEventListener('click', e => this.onClick(e))
         this.touches = []
 
+        this.startT = 0
+
         this.click = null
     }
 
@@ -47,11 +49,13 @@ export default class Touch extends EventEmitter {
     }
 
     onClick(event) {
-        const { ndcX, ndcY } = this.getTouchPosition(event)
-        this.click = new THREE.Vector2(ndcX, ndcY)
-        // console.log(this.click);
+        if (new Date() - this.startT < 150) {
+            // click
+            const { ndcX, ndcY } = this.getTouchPosition(event)
+            this.click = new THREE.Vector2(ndcX, ndcY)
 
-        this.trigger('click')
+            this.trigger('click')
+        }
     }
 
     getTouchPosition(event) {
@@ -71,6 +75,8 @@ export default class Touch extends EventEmitter {
      *  Touch
      */
     onStart(event) {
+        this.startT = new Date()
+
         this.isTouched = true
         this.touches.length = 0
 
