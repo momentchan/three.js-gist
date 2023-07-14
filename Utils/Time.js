@@ -7,25 +7,36 @@ export default class Time extends EventEmitter {
 
         // Setup
         this.start = Date.now()
-        this.fps = new FPS()
+        
         this.current = this.start
         this.elapsed = 0
         this.delta = 16
+        
+        this.fpsOn = false
+
+        if(this.fpsOn)
+            this.fps = new FPS()
+
         this.tick()
     }
 
     tick() {
-        this.fps.stats.begin()
+        if (this.fpsOn)
+            this.fps.stats.begin()
+
         const currentTime = Date.now()
         this.delta = currentTime - this.current
         this.current = currentTime
         this.elapsed = this.current - this.start
-        
+
         window.requestAnimationFrame(() => {
             this.tick()
         })
-        
+
         this.trigger('tick')
-        this.fps.stats.end()
+
+        if (this.fpsOn)
+            this.fps.stats.end()
     }
+
 }

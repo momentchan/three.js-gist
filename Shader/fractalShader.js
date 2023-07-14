@@ -1,5 +1,5 @@
 import fractal from "./Cginc/Fractal";
-
+import utility from "./Cginc/Utility";
 
 const fractalShader = {
 
@@ -7,7 +7,6 @@ const fractalShader = {
 
     uniforms: {
         'tDiffuse': { value: null },
-        'uTexture': { value: null },
         'uTime': { value: 0 },
         'uSpeed': { value: 0 },
         'uAspect': { value: 0 }
@@ -32,16 +31,7 @@ const fractalShader = {
 		varying vec2 vUv;
 
         ${fractal}
-        
-        float remap(float In, vec2 InMinMax, vec2 OutMinMax)
-        {
-            return OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
-        }
-        
-        float Contrast(float In, float Contrast) {
-            float midpoint = pow(0.5, 2.2);
-            return (In - midpoint) * Contrast + midpoint;
-        }
+        ${utility}
         
         float getFractal(vec2 uv, float time) {
             vec3 p = vec3(uv, time);
