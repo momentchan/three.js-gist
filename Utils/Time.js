@@ -38,5 +38,4 @@ export default class Time extends EventEmitter {
         if (this.fpsOn)
             this.fps.stats.end()
     }
-
 }

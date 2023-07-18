@@ -12,6 +12,12 @@ export default class CameraBase {
         this.setOrbitControl()
     }
 
+    getWorldPos() {
+        const wpos = new THREE.Vector3();
+        this.instance.getWorldPosition(wpos)
+        return wpos
+    }
+
     getWorldSizeAtDistance(distance) {
         const fovRadians = THREE.MathUtils.degToRad(this.instance.fov);
         const h = 2 * Math.tan(fovRadians * 0.5) * distance;
@@ -22,14 +28,13 @@ export default class CameraBase {
     getWorldPosFromNDC(ndc, distance) {
         var vector = new THREE.Vector3(ndc.x, ndc.y, 0.2);
 
-        const cameraWorldPos = new THREE.Vector3();
-        this.instance.getWorldPosition(cameraWorldPos)
+        const wpos = this.getWorldPos()
 
         vector.unproject(this.instance);
 
-        var dir = vector.sub(cameraWorldPos).normalize();
+        var dir = vector.sub(wpos).normalize();
 
-        return cameraWorldPos.clone().add(dir.multiplyScalar(distance));
+        return wpos.clone().add(dir.multiplyScalar(distance));
     }
 
     setInstance() {
