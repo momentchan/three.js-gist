@@ -9,12 +9,10 @@ export default class Touch extends EventEmitter {
 
         this.touchX = 0
         this.touchY = 0
-
         this.isTouched = false
+        this.deviceType = this.isTouchDevice() ? "touch" : "mouse"
 
-        const deviceType = this.isTouchDevice() ? "touch" : "mouse"
-
-        const events = {
+        this.events = {
             "mouse": {
                 start: "mousedown",
                 move: "mousemove",
@@ -27,11 +25,15 @@ export default class Touch extends EventEmitter {
             }
         }
 
-        this.canvas.addEventListener(events[deviceType].start, e => this.onStart(e))
-        this.canvas.addEventListener(events[deviceType].move, e => this.onMove(e))
-        this.canvas.addEventListener(events[deviceType].end, e => this.onEnd(e))
-        this.canvas.addEventListener(events[deviceType].end, e => this.onEnd(e))
-        this.canvas.addEventListener('click', e => this.onClick(e))
+        this.startHandle = this.onStart.bind(this)
+        this.moveHandle = this.onMove.bind(this)
+        this.endHandle = this.onEnd.bind(this)
+        this.clickHandle = this.onClick.bind(this)
+
+        this.canvas.addEventListener(this.events[this.deviceType].start, this.startHandle)
+        this.canvas.addEventListener(this.events[this.deviceType].move, this.moveHandle)
+        this.canvas.addEventListener(this.events[this.deviceType].end, this.endHandle)
+        this.canvas.addEventListener('click', this.clickHandle)
         this.touches = []
 
         this.startT = 0
@@ -102,5 +104,26 @@ export default class Touch extends EventEmitter {
         this.isTouched = false
 
         this.trigger('onEnd')
+    }
+
+    dispose() {
+        this.canvas.removeEventListener(this.events[this.deviceType].start, this.startHandle);
+        this.canvas.removeEventListener(this.events[this.deviceType].move, this.moveHandle);
+        this.canvas.removeEventListener(this.events[this.deviceType].end, this.endHandle);
+        this.canvas.removeEventListener('click', this.clickHandle);
+
+        this.startHandle = null
+        this.moveHandle = null
+        this.endHandle = null
+        this.clickHandle = null
+        this.events = null
+        this.deviceType = null
+        this.canvas = null
+        this.touches = null
+        this.touchX = null
+        this.touchY = null
+        this.isTouched = null
+        this.startT = null
+        this.click = null
     }
 }

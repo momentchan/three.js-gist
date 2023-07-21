@@ -61,6 +61,7 @@ export default class ExperienceBase {
                         value.dispose()
                     }
                 }
+                child.material.dispose()
             }
         })
 

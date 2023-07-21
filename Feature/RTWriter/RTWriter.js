@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import BufferCamera from './BufferCamera';
 
 /**
  * Class renders scene to a render texture
@@ -26,5 +25,25 @@ export default class RTWriter {
 
     resize() {
         this.camera.resize()
+    }
+
+    dispose() {
+        this.target.dispose()
+        this.camera.controls.dispose()
+
+        this.scene.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+                child.geometry.dispose()
+
+                for (const key in child.material) {
+                    const value = child.material[key]
+
+                    if (value && typeof value.dispose === 'function') {
+                        value.dispose()
+                    }
+                }
+                child.material.dispose()
+            }
+        })
     }
 }
